@@ -1,0 +1,12 @@
+{
+  "name": "parcel-plugin-screeps",
+  "description": "A parcel plugin to upload code to Screeps servers",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/marengohue/parcel-plugin-screeps",
+  "author": "Eugene Rebedailo <mokonamodokidesu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
