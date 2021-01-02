@@ -17,6 +17,17 @@ function readBundleContents(bundles) {
     }));
 }
 
+function normalizeAndFixModuleNames(modulesArray) {
+    return modulesArray.map(moduleObj => 
+        Object.keys(moduleObj)
+        .map(key => ({
+            [path.parse(key).name]: moduleObj[key]
+        }))
+        .reduce((acc, val) => ({ ...acc, ...val }), {})
+    )
+    .reduce((acc, val) => ({ ...acc, ...val }), {});
+}
+
 module.exports = (bundler) => {
     bundler.on('bundled', async bundle => {
         const cfg = await getConfig();
@@ -31,7 +42,7 @@ module.exports = (bundler) => {
         });
         await axiosInstance.post('/user/code', {
             branch: cfg.branch || "default",
-            modules: moduleData.reduce((acc, val) => ({ ...acc, ...val }), {})
+            modules: normalizeAndFixModuleNames(moduleData)
         });
     });
 }
